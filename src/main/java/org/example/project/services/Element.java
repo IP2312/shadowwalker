@@ -6,8 +6,8 @@ import java.util.Map;
 public class Element {
         public String type;
         public long id;
-        public List<Long> nodes; // for "way"
+        public List<Long> nodes;
         public Map<String, String> tags;
-        public Double lat; // for "node"
+        public Double lat;
         public Double lon;
 }

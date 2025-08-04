@@ -13,17 +13,47 @@ public class OverpassServices {
         this.webClient = builder.baseUrl("https://overpass-api.de/api/interpreter").build();
     }
 
-    public OverpassResponse getBuildingsNearPoints(){
+    public OverpassResponse getBuildingsNearPoints() {
         String query = """
-            [out:json][timeout:25];
-            (
-              way(around:25, 48.30949476831703, 14.29304903467718)["building"]["height"];
-              way(around:25, 48.30949476831703, 14.29304903467718)["building"]["building:levels"];
-            );
-            out body;
-            >;
-            out skel qt;
-            """;
+                [out:json][timeout:25];
+                (
+                  // Buildings with height
+                  way(around:25, 48.30949476831703, 14.29304903467718)
+                    ["building"]["height"];
+                
+                  // Buildings with number of levels
+                  way(around:25, 48.30949476831703, 14.29304903467718)
+                    ["building"]["building:levels"];
+                
+                );
+                out body;
+                >;
+                out skel qt;
+                """;
+
+        return webClient.post()
+                .uri("/interpreter")
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE)
+                .bodyValue(query)
+                .retrieve()
+                .bodyToMono(OverpassResponse.class)
+                .block();
+    }
+
+    public OverpassResponse getRouts() {
+        String query = """
+                [out:json][timeout:25];
+                (
+                
+                // Walkable pedestrian paths (not private)
+                way(around:25, 48.30949476831703, 14.29304903467718)
+                    ["highway"]["highway"~"footway|pedestrian|path|living_street"]
+                    ["foot"!~"no|private"];
+                    );
+                out body;
+                >;
+                out skel qt;
+                """;
 
         return webClient.post()
                 .uri("/interpreter")
