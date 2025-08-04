@@ -1,16 +1,15 @@
 package org.example.project.services;
 
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 public class OverpassServices {
-    private final WebClient webClient;
+    private final RestTemplate restTemplate;
 
-    public OverpassServices(WebClient.Builder builder) {
-        this.webClient = builder.baseUrl("https://overpass-api.de/api/interpreter").build();
+    public OverpassServices() {
+        this.restTemplate = new RestTemplate();
     }
 
     public OverpassResponse getBuildingsNearPoints() {
@@ -30,14 +29,8 @@ public class OverpassServices {
                 >;
                 out skel qt;
                 """;
+                return sendQuery(query);
 
-        return webClient.post()
-                .uri("/interpreter")
-                .header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE)
-                .bodyValue(query)
-                .retrieve()
-                .bodyToMono(OverpassResponse.class)
-                .block();
     }
 
     public OverpassResponse getRouts() {
@@ -54,13 +47,24 @@ public class OverpassServices {
                 >;
                 out skel qt;
                 """;
-
-        return webClient.post()
-                .uri("/interpreter")
-                .header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE)
-                .bodyValue(query)
-                .retrieve()
-                .bodyToMono(OverpassResponse.class)
-                .block();
+        return sendQuery(query);
     }
+    private OverpassResponse sendQuery(String query) {
+        String url = "https://overpass-api.de/api/interpreter";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.TEXT_PLAIN);
+
+        HttpEntity<String> request = new HttpEntity<>(query, headers);
+
+        ResponseEntity<OverpassResponse> response = restTemplate.exchange(
+                url,
+                HttpMethod.POST,
+                request,
+                OverpassResponse.class
+        );
+
+        return response.getBody();
+    }
+
 }
