@@ -15,7 +15,11 @@ public class ProjectApplication {
         SunPositon sunPositon = new SunPositon();
 
         ZonedDateTime time = ZonedDateTime.now();
-        sunPositon.getAzimuth(48.30949476831703, 14.29304903467718, time);
+        System.out.println(time);
+        System.out.println("Azimuth:");
+        System.out.println( sunPositon.getAzimuth(48.30949476831703, 14.29304903467718, time));
+        System.out.println("Elevation:");
+        System.out.println( sunPositon.getElevation(48.30949476831703, 14.29304903467718, time));
 
 
 
