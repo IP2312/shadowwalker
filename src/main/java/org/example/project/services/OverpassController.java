@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/osm")
+
 public class OverpassController {
     private final OverpassServices overpassServices;
 
@@ -13,27 +14,32 @@ public class OverpassController {
         this.overpassServices = overpassServices;
     }
 
-    @RequestMapping("/buildings")
-    public ResponseEntity<String> getBuildings(){
-        OverpassResponse result = overpassServices.getBuildingsNearPoints();
-        System.out.println("buildings:");
-        for (OverpassElement element : result.elements) {
-            System.out.println(element.type + " " + element.id);
-        }
+//    @RequestMapping("/buildings")
+//    public ResponseEntity<String> getBuildings(){
+//        OverpassResponse result = overpassServices.getBuildingsNearPoints();
+//        System.out.println("buildings:");
+//        for (OverpassElement element : result.elements) {
+//            System.out.println(element.type + " " + element.id);
+//        }
+//
+//        return ResponseEntity.ok(result.toString());
+//    }
+//
+//    @RequestMapping("/routs")
+//    public ResponseEntity<String> getRouts(){
+//        OverpassResponse result = overpassServices.getRouts();
+//        System.out.println("routs:");
+//        for (OverpassElement element : result.elements) {
+//            System.out.println(element.type + " " + element.id);
+//        }
+//    return ResponseEntity.ok(result.toString());
+//
+//    }
 
-        return ResponseEntity.ok(result.toString());
+    @RequestMapping("/map")
+    public String map(){
+        System.out.println("Map");
+        return "map.html";
     }
-
-    @RequestMapping("/routs")
-    public ResponseEntity<String> getRouts(){
-        OverpassResponse result = overpassServices.getRouts();
-        System.out.println("routs:");
-        for (OverpassElement element : result.elements) {
-            System.out.println(element.type + " " + element.id);
-        }
-    return ResponseEntity.ok(result.toString());
-
-    }
-
 
 }
