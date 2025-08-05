@@ -16,10 +16,24 @@ public class OverpassController {
     @RequestMapping("/buildings")
     public ResponseEntity<String> getBuildings(){
         OverpassResponse result = overpassServices.getBuildingsNearPoints();
-        for (Element element : result.elements) {
+        System.out.println("buildings:");
+        for (OverpassElement element : result.elements) {
             System.out.println(element.type + " " + element.id);
         }
 
         return ResponseEntity.ok(result.toString());
     }
+
+    @RequestMapping("/routs")
+    public ResponseEntity<String> getRouts(){
+        OverpassResponse result = overpassServices.getRouts();
+        System.out.println("routs:");
+        for (OverpassElement element : result.elements) {
+            System.out.println(element.type + " " + element.id);
+        }
+    return ResponseEntity.ok(result.toString());
+
+    }
+
+
 }

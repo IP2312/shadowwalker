@@ -54,7 +54,12 @@
             <optional>true</optional>
         </dependency>
 
-
+        <!-- https://mvnrepository.com/artifact/org.shredzone.commons/commons-suncalc -->
+        <dependency>
+            <groupId>org.shredzone.commons</groupId>
+            <artifactId>commons-suncalc</artifactId>
+            <version>3.11</version>
+        </dependency>
 
     </dependencies>
 
