@@ -1,10 +1,8 @@
 package org.example.project.controller;
 
-import org.example.project.model.Node;
-import org.example.project.model.OverpassElement;
-import org.example.project.model.OverpassResponse;
-import org.example.project.model.Way;
+import org.example.project.model.*;
 import org.example.project.services.OverpassServices;
+import org.example.project.util.UtilCoordinates;
 import org.example.project.view.View;
 import org.locationtech.jts.geom.Coordinate;
 
@@ -15,9 +13,22 @@ public class HomeController {
     OverpassServices overpassServices = new OverpassServices();
     ArrayList<Way> routs = new ArrayList<>();
     ArrayList<Node> nodes = new ArrayList<>();
+    UtilCoordinates utilCoordinates = new UtilCoordinates();
 
-    Coordinate startPoint = view.getStartPoint();
-    Coordinate destinationPoint = view.getDestinationPoint();
+
+
+
+    public void calculateDistance(){
+        GeoCoordinate startPoint = view.getStartPoint();
+        GeoCoordinate destinationPoint = view.getDestinationPoint();
+        System.out.println("Harvsindistance:");
+        System.out.println(utilCoordinates.haversineDistance(startPoint, destinationPoint));
+        System.out.println("Distance: ");
+        Coordinate coordinate1 = new Coordinate(startPoint.getLat(),startPoint.getLon());
+        Coordinate coordinate2 = new Coordinate(destinationPoint.getLat(),destinationPoint.getLon());
+        System.out.println(coordinate1.distance(coordinate2));
+    }
+
 
     public void loadMapObjects(){
          OverpassResponse result  = overpassServices.getRouts();
@@ -27,7 +38,7 @@ public class HomeController {
              if (element.type.equals("way")){
                 routs.add(new Way(element.id, "road", (ArrayList<Long>) element.nodes));
              } else if (element.type.equals("node")) {
-                 nodes.add(new Node((int) element.id, new Coordinate(element.lat, element.lon)));
+                 nodes.add(new Node((int) element.id, new GeoCoordinate(element.lat, element.lon)));
              }
          }
     }

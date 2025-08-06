@@ -1,6 +1,7 @@
 package org.example.project;
 
 import org.example.project.controller.HomeController;
+import org.locationtech.jts.geom.Coordinate;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -12,6 +13,7 @@ public class ProjectApplication {
         SpringApplication.run(ProjectApplication.class, args);
         HomeController homeController = new HomeController();
 
+        homeController.calculateDistance();
         homeController.loadMapObjects();
 
 

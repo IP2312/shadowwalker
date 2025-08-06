@@ -4,9 +4,9 @@ import org.locationtech.jts.geom.Coordinate;
 
 public class Node {
     private int id;
-    private Coordinate coordinate;;
+    private GeoCoordinate coordinate;
 
-    public Node(int id, Coordinate coordinate) {
+    public Node(int id, GeoCoordinate coordinate) {
         this.id = id;
         this.coordinate = coordinate;
     }
