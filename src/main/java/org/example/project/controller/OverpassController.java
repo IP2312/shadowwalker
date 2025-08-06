@@ -1,17 +1,27 @@
-package org.example.project.services;
+package org.example.project.controller;
 
-import org.springframework.http.ResponseEntity;
+import org.example.project.services.OverpassServices;
+import org.locationtech.jts.geom.Coordinate;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/osm")
+@Controller
 
 public class OverpassController {
     private final OverpassServices overpassServices;
+    private Coordinate startPoint;
+    private Coordinate end;
 
     public OverpassController(OverpassServices overpassServices) {
         this.overpassServices = overpassServices;
+    }
+
+    @RequestMapping("/map")
+    public String map() {
+        System.out.println("Map from controller");
+
+        return "map.html";
+
     }
 
 //    @RequestMapping("/buildings")
@@ -36,10 +46,8 @@ public class OverpassController {
 //
 //    }
 
-    @RequestMapping("/map")
-    public String map(){
-        System.out.println("Map");
-        return "map.html";
-    }
+
+
+
 
 }

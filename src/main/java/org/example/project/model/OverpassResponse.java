@@ -1,4 +1,4 @@
-package org.example.project.services;
+package org.example.project.model;
 
 import java.util.List;
 
