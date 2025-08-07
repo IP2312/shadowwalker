@@ -1,64 +1,20 @@
 package org.example.project.model;
 
-import org.example.project.controller.Objects;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class Way {
-    private long id;
-    private String type;
-    private ArrayList<Long> nodesId;
+public interface Way {
+    long getId();
 
-    public Way(long id, String type, ArrayList<Long> nodesId) {
-        setId(id);
-        setType(type);
-        setNodesId(nodesId);
-    }
+    void setId(long id);
 
-    public long getId() {
-        return id;
-    }
+    String getType();
 
-    public void setId(long id) {
-        try {
-            this.id = Long.parseLong(String.valueOf(id));
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-            System.out.println("Id is not a number");
-        }
-    }
+    void setType(String input);
 
-    public String getType() {
-        return type;
-    }
+    ArrayList<Long> getNodesId();
 
-    public void setType(String input) {
-        if (Arrays.stream(Objects.values())
-                .anyMatch(e -> e.name().equalsIgnoreCase(input))) {
-            this.type = input.toLowerCase();
-        }else {
-            throw new IllegalArgumentException("Type is not valid");
-
-
-        }
-
-    }
-
-    public ArrayList<Long> getNodesId() {
-        return nodesId;
-    }
-
-    public void setNodesId(ArrayList<Long> nodesId) {
-        this.nodesId = nodesId;
-    }
+    void setNodesId(ArrayList<Long> nodesId);
 
     @Override
-    public String toString() {
-        return "Way{" +
-                "id=" + id +
-                ", type='" + type + '\'' +
-                ", nodes=" + nodesId +
-                '}';
-    }
+    String toString();
 }

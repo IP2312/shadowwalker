@@ -25,5 +25,11 @@ public class GeoCoordinate {
         this.lon = lon;
     }
 
-
+    @Override
+    public String toString() {
+        return "GeoCoordinate{" +
+                "lat=" + lat +
+                ", lon=" + lon +
+                '}';
+    }
 }

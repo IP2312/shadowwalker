@@ -1,13 +1,14 @@
 package org.example.project.model;
 
-import org.locationtech.jts.geom.Coordinate;
+public interface Node {
+    long getId();
 
-public class Node {
-    private int id;
-    private GeoCoordinate coordinate;
+    void setId(int id);
 
-    public Node(int id, GeoCoordinate coordinate) {
-        this.id = id;
-        this.coordinate = coordinate;
-    }
+    GeoCoordinate getCoordinate();
+
+    void setCoordinate(GeoCoordinate coordinate);
+
+    @Override
+    String toString();
 }

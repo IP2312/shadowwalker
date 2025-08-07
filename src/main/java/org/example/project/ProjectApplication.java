@@ -1,7 +1,7 @@
 package org.example.project;
 
 import org.example.project.controller.HomeController;
-import org.locationtech.jts.geom.Coordinate;
+import org.example.project.model.RouteNode;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -15,6 +15,9 @@ public class ProjectApplication {
 
         homeController.calculateDistance();
         homeController.loadMapObjects();
+        RouteNode closestNode = homeController.getClosestNode();
+        System.out.println(closestNode);
+        System.out.println(homeController.getRoutFromNode(closestNode));
 
 
 
