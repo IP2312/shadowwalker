@@ -1,0 +1,58 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.0.6 Chrome/138.0.7204.100 Electron/37.2.3 Safari/537.36" version="28.0.6">
+  <diagram name="Seite-1" id="Rt5CnZ4Q0ylix6PVqF4p">
+    <mxGraphModel dx="1613" dy="562" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="by-8xRh2DoT8zti-E0eY-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="by-8xRh2DoT8zti-E0eY-1" target="by-8xRh2DoT8zti-E0eY-2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="by-8xRh2DoT8zti-E0eY-1" value="get destination" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="300" y="180" width="100" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="by-8xRh2DoT8zti-E0eY-2" value="get current location" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="300" y="320" width="100" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="Wr040Zg8K2RzRJo0UWp4-2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="by-8xRh2DoT8zti-E0eY-2" target="Wr040Zg8K2RzRJo0UWp4-1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="350" y="390" as="sourcePoint" />
+            <mxPoint x="350" y="560" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Wr040Zg8K2RzRJo0UWp4-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="Wr040Zg8K2RzRJo0UWp4-1" target="Wr040Zg8K2RzRJo0UWp4-8" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Wr040Zg8K2RzRJo0UWp4-1" value="calculate distance between locations" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="300" y="420" width="100" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="Wr040Zg8K2RzRJo0UWp4-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="Wr040Zg8K2RzRJo0UWp4-8" target="Wr040Zg8K2RzRJo0UWp4-10" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Wr040Zg8K2RzRJo0UWp4-8" value="load data from openstreetmap with margin&amp;nbsp;" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="300" y="530" width="100" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="Wr040Zg8K2RzRJo0UWp4-10" value="find node of a rout closest to current location" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="300" y="650" width="100" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="Wr040Zg8K2RzRJo0UWp4-17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="Wr040Zg8K2RzRJo0UWp4-14" target="Wr040Zg8K2RzRJo0UWp4-16" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Wr040Zg8K2RzRJo0UWp4-14" value="calculate rout" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="310" y="810" width="100" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="Wr040Zg8K2RzRJo0UWp4-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.42;entryY=-0.048;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="Wr040Zg8K2RzRJo0UWp4-10" target="Wr040Zg8K2RzRJo0UWp4-14" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Wr040Zg8K2RzRJo0UWp4-19" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="Wr040Zg8K2RzRJo0UWp4-16" target="Wr040Zg8K2RzRJo0UWp4-18" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Wr040Zg8K2RzRJo0UWp4-16" value="iterate though nodes of rout" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="140" y="820" width="100" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="Wr040Zg8K2RzRJo0UWp4-18" value="check if sunray hit building for each node" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="-40" y="820" width="100" height="70" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
