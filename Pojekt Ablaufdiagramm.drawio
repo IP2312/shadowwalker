@@ -52,14 +52,8 @@
         <mxCell id="Wr040Zg8K2RzRJo0UWp4-18" value="check if sunray hit building for each node" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="1" vertex="1">
           <mxGeometry x="-130" y="810" width="100" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="lM7Y2t4ddnBXnJa8sTnV-2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.42;entryY=-0.048;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="lM7Y2t4ddnBXnJa8sTnV-5" target="lM7Y2t4ddnBXnJa8sTnV-1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="350" y="720" as="sourcePoint" />
-            <mxPoint x="356" y="1017" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="lM7Y2t4ddnBXnJa8sTnV-1" value="check if crossrouds" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="210" y="980" width="100" height="70" as="geometry" />
+        <mxCell id="lM7Y2t4ddnBXnJa8sTnV-1" value="a" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="300" y="890" width="100" height="70" as="geometry" />
         </mxCell>
         <mxCell id="lM7Y2t4ddnBXnJa8sTnV-4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.42;entryY=-0.048;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="Wr040Zg8K2RzRJo0UWp4-10" target="lM7Y2t4ddnBXnJa8sTnV-3">
           <mxGeometry relative="1" as="geometry">
@@ -67,14 +61,13 @@
             <mxPoint x="356" y="917" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="lM7Y2t4ddnBXnJa8sTnV-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="lM7Y2t4ddnBXnJa8sTnV-3" target="lM7Y2t4ddnBXnJa8sTnV-5">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="lM7Y2t4ddnBXnJa8sTnV-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="lM7Y2t4ddnBXnJa8sTnV-3" target="lM7Y2t4ddnBXnJa8sTnV-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="360" y="880" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
         <mxCell id="lM7Y2t4ddnBXnJa8sTnV-3" value="find routs containing the node" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="1">
           <mxGeometry x="300" y="770" width="100" height="70" as="geometry" />
-        </mxCell>
-        <mxCell id="lM7Y2t4ddnBXnJa8sTnV-5" value="if routs = 1" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="320" y="880" width="80" height="80" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

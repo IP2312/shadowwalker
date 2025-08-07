@@ -73,5 +73,8 @@ public class HomeController {
         return newRouts;
     }
 
+    public ArrayList<RouteNode> findNeighbours(RoutWay rout){
+    }
+
 
 }
