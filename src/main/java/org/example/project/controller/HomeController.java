@@ -2,6 +2,7 @@ package org.example.project.controller;
 
 import org.example.project.model.*;
 import org.example.project.services.OverpassServices;
+import org.example.project.util.Navigation;
 import org.example.project.util.UtilCoordinates;
 import org.example.project.view.View;
 import org.locationtech.jts.geom.Coordinate;
@@ -14,6 +15,7 @@ public class HomeController {
     ArrayList<RoutWay> routs = new ArrayList<>();
     ArrayList<RouteNode> nodes = new ArrayList<>();
     UtilCoordinates utilCoordinates = new UtilCoordinates();
+    Navigation navigation = new Navigation();
 
 
     public void calculateDistance() {
@@ -47,34 +49,18 @@ public class HomeController {
     }
 
 
-    public RouteNode getClosestNode() {
-        GeoCoordinate start = view.getStartPoint();
+    public void findeRout(GeoCoordinate startPoint, GeoCoordinate endPoint){
+        RouteNode startNode = navigation.getClosestNode(startPoint, nodes);
+        RouteNode endNode = navigation.getClosestNode(endPoint, nodes);
+        ArrayList<RoutWay> possibleRouts = navigation.getRoutsFromNode(startNode,routs);
+        ArrayList<Long> neighbourIds = navigation.findNeighboursId(startNode,possibleRouts);
+        ArrayList<RouteNode> neighboursNodes = navigation.findNeighboursNodes(neighbourIds,nodes);
+        System.out.println(neighboursNodes);
+        navigation.setNeighbourDistances(neighboursNodes,startNode, endNode);
+        System.out.println(neighboursNodes);
 
-        double distance = Double.MAX_VALUE;
-        RouteNode currentNode = null;
-        for (RouteNode node : nodes) {
-            if (distance > utilCoordinates.haversineDistance(start, node.getCoordinate())) {
-                distance = utilCoordinates.haversineDistance(start, node.getCoordinate());
-                currentNode = node;
-            }
-        }
-        return currentNode;
     }
 
-    public ArrayList<RoutWay> getRoutsFromNode(RouteNode node) {
-        ArrayList<RoutWay> newRouts = new ArrayList<>();
-        for (RoutWay rout : routs) {
-            for (Long nodeId : rout.getNodesId()) {
-                if (nodeId == node.getId()) {
-                    newRouts.add(rout);
-                }
-            }
-        }
-        return newRouts;
-    }
-
-    public ArrayList<RouteNode> findNeighbours(RoutWay rout){
-    }
 
 
 }

@@ -4,18 +4,24 @@ public class RouteNode implements Node {
     private long id;
     private GeoCoordinate coordinate;
     private boolean intersection;
+    private double costToReachNode;
+    private double estimatedCostToGaol;
 
 
     public RouteNode(long id, GeoCoordinate coordinate, boolean intersection) {
         this.id = id;
         this.coordinate = coordinate;
         this.intersection = intersection;
+        this.costToReachNode = 0;
+        this.estimatedCostToGaol = 0;
     }
 
     public RouteNode(long id, GeoCoordinate coordinate) {
         this.id = id;
         this.coordinate = coordinate;
         this.intersection = false;
+        this.costToReachNode = 0;
+        this.estimatedCostToGaol = 0;
     }
 
     @Override
@@ -38,12 +44,30 @@ public class RouteNode implements Node {
         this.coordinate = coordinate;
     }
 
+    public double getCostToReachNode() {
+        return costToReachNode;
+    }
+
+    public void setCostToReachNode(double costToReachNode) {
+        this.costToReachNode = costToReachNode;
+    }
+
+    public double getEstimatedCostToGaol() {
+        return estimatedCostToGaol;
+    }
+
+    public void setEstimatedCostToGaol(double estimatedCostToGaol) {
+        this.estimatedCostToGaol = estimatedCostToGaol;
+    }
 
     @Override
     public String toString() {
-        return "Node{" +
+        return "RouteNode{" +
                 "id=" + id +
                 ", coordinate=" + coordinate +
+                ", intersection=" + intersection +
+                ", costToReachNode=" + costToReachNode +
+                ", estimatedCostToGaol=" + estimatedCostToGaol +
                 '}';
     }
 }

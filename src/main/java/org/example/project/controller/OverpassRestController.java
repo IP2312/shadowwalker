@@ -28,7 +28,8 @@ public class OverpassRestController {
                 new CoordinateDTO(48.30949476831703, 14.29304903467718),
                 new CoordinateDTO(48.309911657762406, 14.2919921025157),
                 new CoordinateDTO(48.31334731019215, 14.294036430536547),
-                new CoordinateDTO(48.31286419963752, 14.29509336270001)
+                new CoordinateDTO(48.31286419963752, 14.29509336270001),
+                new CoordinateDTO(48.31062975693254, 14.292077270927331)
         );
     }
 
