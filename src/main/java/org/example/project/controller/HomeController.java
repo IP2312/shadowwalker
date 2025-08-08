@@ -61,7 +61,7 @@ public class HomeController {
         return currentNode;
     }
 
-    public ArrayList<RoutWay> getRoutFromNode(RouteNode node) {
+    public ArrayList<RoutWay> getRoutsFromNode(RouteNode node) {
         ArrayList<RoutWay> newRouts = new ArrayList<>();
         for (RoutWay rout : routs) {
             for (Long nodeId : rout.getNodesId()) {

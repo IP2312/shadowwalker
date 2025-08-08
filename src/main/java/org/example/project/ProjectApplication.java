@@ -17,7 +17,7 @@ public class ProjectApplication {
         homeController.loadMapObjects();
         RouteNode closestNode = homeController.getClosestNode();
         System.out.println(closestNode);
-        System.out.println(homeController.getRoutFromNode(closestNode));
+        System.out.println(homeController.getRoutsFromNode(closestNode));
 
 
 
