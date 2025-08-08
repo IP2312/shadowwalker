@@ -6,6 +6,8 @@ public class RouteNode implements Node {
     private boolean intersection;
     private double costToReachNode;
     private double estimatedCostToGaol;
+    private RouteNode parentNode;
+    private RouteNode childNode;
 
 
     public RouteNode(long id, GeoCoordinate coordinate, boolean intersection) {
@@ -14,6 +16,9 @@ public class RouteNode implements Node {
         this.intersection = intersection;
         this.costToReachNode = 0;
         this.estimatedCostToGaol = 0;
+        this.childNode = null;
+        this.parentNode = null;
+
     }
 
     public RouteNode(long id, GeoCoordinate coordinate) {
@@ -22,6 +27,8 @@ public class RouteNode implements Node {
         this.intersection = false;
         this.costToReachNode = 0;
         this.estimatedCostToGaol = 0;
+        this.childNode = null;
+        this.parentNode = null;
     }
 
     @Override
