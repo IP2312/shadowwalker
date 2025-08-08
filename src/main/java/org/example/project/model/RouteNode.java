@@ -8,6 +8,7 @@ public class RouteNode implements Node {
     private double estimatedCostToGaol;
     private RouteNode parentNode;
     private RouteNode childNode;
+    private boolean explored;
 
 
     public RouteNode(long id, GeoCoordinate coordinate, boolean intersection) {
@@ -18,7 +19,7 @@ public class RouteNode implements Node {
         this.estimatedCostToGaol = 0;
         this.childNode = null;
         this.parentNode = null;
-
+        this.explored = false;
     }
 
     public RouteNode(long id, GeoCoordinate coordinate) {
@@ -29,6 +30,7 @@ public class RouteNode implements Node {
         this.estimatedCostToGaol = 0;
         this.childNode = null;
         this.parentNode = null;
+        this.explored = false;
     }
 
     @Override
@@ -59,12 +61,27 @@ public class RouteNode implements Node {
         this.costToReachNode = costToReachNode;
     }
 
-    public double getEstimatedCostToGaol() {
+    public double getEstimatedCostToGoal() {
         return estimatedCostToGaol;
     }
 
     public void setEstimatedCostToGaol(double estimatedCostToGaol) {
         this.estimatedCostToGaol = estimatedCostToGaol;
+    }
+
+    public RouteNode getChildNode(){
+        return childNode;
+    }
+    public RouteNode getParentNode(){
+        return parentNode;
+    }
+    public void setParentNode(RouteNode parentNode){
+        this.parentNode = parentNode;
+    }
+
+
+    public void setChildNode(RouteNode childNode){
+        this.childNode = childNode;
     }
 
     @Override

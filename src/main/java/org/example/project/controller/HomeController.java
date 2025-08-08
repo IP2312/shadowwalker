@@ -2,6 +2,7 @@ package org.example.project.controller;
 
 import org.example.project.model.*;
 import org.example.project.services.OverpassServices;
+import org.example.project.util.Frontier;
 import org.example.project.util.Navigation;
 import org.example.project.util.UtilCoordinates;
 import org.example.project.view.View;
@@ -16,6 +17,7 @@ public class HomeController {
     ArrayList<RouteNode> nodes = new ArrayList<>();
     UtilCoordinates utilCoordinates = new UtilCoordinates();
     Navigation navigation = new Navigation();
+    Frontier frontier = new Frontier();
 
 
     public void calculateDistance() {
@@ -52,12 +54,20 @@ public class HomeController {
     public void findeRout(GeoCoordinate startPoint, GeoCoordinate endPoint){
         RouteNode startNode = navigation.getClosestNode(startPoint, nodes);
         RouteNode endNode = navigation.getClosestNode(endPoint, nodes);
-        ArrayList<RoutWay> possibleRouts = navigation.getRoutsFromNode(startNode,routs);
-        ArrayList<Long> neighbourIds = navigation.findNeighboursId(startNode,possibleRouts);
+        RouteNode currentNode = startNode;
+
+        //Todo loop
+        ArrayList<RoutWay> possibleRouts = navigation.getRoutsFromNode(currentNode,routs);
+        ArrayList<Long> neighbourIds = navigation.findNeighboursId(currentNode,possibleRouts);
         ArrayList<RouteNode> neighboursNodes = navigation.findNeighboursNodes(neighbourIds,nodes);
         System.out.println(neighboursNodes);
-        navigation.setNeighbourDistances(neighboursNodes,startNode, endNode);
+        navigation.setNeighbourDistances(neighboursNodes,currentNode, endNode);
         System.out.println(neighboursNodes);
+        frontier.addNodes(neighboursNodes);
+
+        currentNode = frontier.removeNode();
+        currentNode.setParentNode(startNode);
+
 
     }
 
