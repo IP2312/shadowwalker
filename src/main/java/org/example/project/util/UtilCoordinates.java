@@ -1,6 +1,10 @@
 package org.example.project.util;
 
+import org.example.project.model.CoordinateDTO;
 import org.example.project.model.GeoCoordinate;
+import org.example.project.model.RouteNode;
+
+import java.util.ArrayList;
 
 public class UtilCoordinates {
     public double haversineDistance(GeoCoordinate coordinate1, GeoCoordinate coordinate2) {
@@ -20,6 +24,14 @@ public class UtilCoordinates {
                         Math.sin(dLon / 2) * Math.sin(dLon / 2);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         return R * c; // in meters
+    }
+
+    public ArrayList<CoordinateDTO> convertDTO(ArrayList<RouteNode> routNodes){
+        ArrayList<CoordinateDTO> coordinates = new ArrayList<>();
+        for (RouteNode node : routNodes) {
+            coordinates.add(new CoordinateDTO(node.getCoordinate().getLat(), node.getCoordinate().getLon()));
+        }
+        return coordinates;
     }
 
 }

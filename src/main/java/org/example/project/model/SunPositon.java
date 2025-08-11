@@ -24,4 +24,6 @@ public class SunPositon {
 
         return position.getAltitude();
     }
+
+
 }

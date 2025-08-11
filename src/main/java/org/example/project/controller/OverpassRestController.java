@@ -2,14 +2,18 @@ package org.example.project.controller;
 
 import org.example.project.model.CoordinateDTO;
 import org.example.project.model.OverpassElement;
+import org.example.project.model.RouteNode;
 import org.example.project.services.OverpassServices;
 import org.example.project.model.OverpassResponse;
+import org.example.project.view.View;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
+
 
 
 @RestController
@@ -23,13 +27,11 @@ public class OverpassRestController {
 
     @GetMapping("/nodes")
     public List<CoordinateDTO> getNodes() {
+        View view = new View();
         System.out.println("Map from Restcontroller");
         return List.of(
-                new CoordinateDTO(48.30949476831703, 14.29304903467718),
-                new CoordinateDTO(48.309911657762406, 14.2919921025157),
-                new CoordinateDTO(48.31334731019215, 14.294036430536547),
-                new CoordinateDTO(48.31286419963752, 14.29509336270001),
-                new CoordinateDTO(48.31062975693254, 14.292077270927331)
+                new CoordinateDTO(view.getStartPoint().lat, view.getStartPoint().lon),
+                new CoordinateDTO(view.getDestinationPoint().lat, view.getDestinationPoint().lon)
         );
     }
 

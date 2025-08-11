@@ -50,6 +50,8 @@ public class Navigation {
                 }
             }
         }
+        System.out.println("neighboursId:");
+        System.out.println(neighboursId);
         return neighboursId;
     }
 
@@ -62,6 +64,7 @@ public class Navigation {
                 }
             }
         }
+        System.out.println("neighboursNodes:");
         return neighboursNodes;
     }
 

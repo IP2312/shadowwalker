@@ -84,6 +84,14 @@ public class RouteNode implements Node {
         this.childNode = childNode;
     }
 
+    public boolean getExplored(){
+        return explored;
+    }
+
+    public void setExplored(boolean explored) {
+        this.explored = explored;
+    }
+
     @Override
     public String toString() {
         return "RouteNode{" +
@@ -92,6 +100,8 @@ public class RouteNode implements Node {
                 ", intersection=" + intersection +
                 ", costToReachNode=" + costToReachNode +
                 ", estimatedCostToGaol=" + estimatedCostToGaol +
+                ", parentNode=" + parentNode.getId() +
+                ", explored=" + explored +
                 '}';
     }
 }

@@ -9,4 +9,10 @@ public class CoordinateDTO {
         this.lon = lon;
     }
 
+    @Override
+    public String toString() {
+        return "CoordinateDTO{" +
+                "lat=" + lat + "," + lon +
+                '}';
+    }
 }

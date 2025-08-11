@@ -14,7 +14,9 @@ public class HomeController {
     View view = new View();
     OverpassServices overpassServices = new OverpassServices();
     ArrayList<RoutWay> routs = new ArrayList<>();
-    ArrayList<RouteNode> nodes = new ArrayList<>();
+    ArrayList<RouteNode> routeNodes = new ArrayList<>();
+    ArrayList<BuildingNode> buildingNodes = new ArrayList<>();
+    ArrayList<BuildingWay> buildings = new ArrayList<>();
     UtilCoordinates utilCoordinates = new UtilCoordinates();
     Navigation navigation = new Navigation();
     Frontier frontier = new Frontier();
@@ -36,7 +38,7 @@ public class HomeController {
     }
 
 
-    public void loadMapObjects() {
+    public void loadRouteObjects() {
         OverpassResponse result = overpassServices.getRouts();
 
         for (OverpassElement element : result.elements) {
@@ -44,33 +46,59 @@ public class HomeController {
             if (element.type.equals("way")) {
                 routs.add(new RoutWay(element.id, "road", (ArrayList<Long>) element.nodes));
             } else if (element.type.equals("node")) {
-                nodes.add(new RouteNode((long) element.id, new GeoCoordinate(element.lat, element.lon)));
+                routeNodes.add(new RouteNode((long) element.id, new GeoCoordinate(element.lat, element.lon)));
 
             }
         }
     }
 
 
-    public void findeRout(GeoCoordinate startPoint, GeoCoordinate endPoint){
-        RouteNode startNode = navigation.getClosestNode(startPoint, nodes);
-        RouteNode endNode = navigation.getClosestNode(endPoint, nodes);
-        RouteNode currentNode = startNode;
-
-        //Todo loop
-        ArrayList<RoutWay> possibleRouts = navigation.getRoutsFromNode(currentNode,routs);
-        ArrayList<Long> neighbourIds = navigation.findNeighboursId(currentNode,possibleRouts);
-        ArrayList<RouteNode> neighboursNodes = navigation.findNeighboursNodes(neighbourIds,nodes);
-        System.out.println(neighboursNodes);
-        navigation.setNeighbourDistances(neighboursNodes,currentNode, endNode);
-        System.out.println(neighboursNodes);
-        frontier.addNodes(neighboursNodes);
-
-        currentNode = frontier.removeNode();
-        currentNode.setParentNode(startNode);
-
-
+    public void loadBuildingsObjects(){
+        OverpassResponse result = overpassServices.getBuildingsNearPoints();
+        for (OverpassElement element : result.elements) {
+            if (element.type.equals("way")) {
+               buildings.add(new BuildingWay(element.id, "building", (ArrayList<Long>) element.nodes));
+            } else if (element.type.equals("node")) {
+               buildingNodes.add(new BuildingNode((long) element.id, element.type, (ArrayList<Long>) element.nodes));
+            }
+        }
     }
 
 
+    public ArrayList<RouteNode> findeRout(GeoCoordinate startPoint, GeoCoordinate endPoint) {
+        ArrayList<RouteNode> routNodes = new ArrayList<>();
 
+        RouteNode startNode = navigation.getClosestNode(startPoint, routeNodes);
+        RouteNode endNode = navigation.getClosestNode(endPoint, routeNodes);
+        RouteNode currentNode = startNode;
+        currentNode.setExplored(true);
+
+        do {
+
+            ArrayList<RoutWay> possibleRouts = navigation.getRoutsFromNode(currentNode, routs);
+            ArrayList<Long> neighbourIds = navigation.findNeighboursId(currentNode, possibleRouts);
+            ArrayList<RouteNode> neighboursNodes = navigation.findNeighboursNodes(neighbourIds, routeNodes);
+            navigation.setNeighbourDistances(neighboursNodes, currentNode, endNode);
+            frontier.addNodes(neighboursNodes);
+
+            currentNode.setChildNode(frontier.removeNode());
+            currentNode.getChildNode().setParentNode(currentNode);
+
+            currentNode = currentNode.getChildNode();
+
+        } while (!currentNode.equals(endNode));
+
+        System.out.println(currentNode);
+
+        ArrayList<RouteNode> shortestPath = new ArrayList<>();
+
+        while (currentNode.getParentNode() != null) {
+            shortestPath.add(currentNode);
+            currentNode = currentNode.getParentNode();
+        }
+
+        System.out.println(shortestPath);
+        return shortestPath;
+
+    }
 }

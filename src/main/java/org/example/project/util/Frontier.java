@@ -6,26 +6,33 @@ import org.example.project.model.RouteNode;
 import java.util.ArrayList;
 
 public class Frontier {
-    private ArrayList<RouteNode> nodes;
+    private ArrayList<RouteNode> frontier = new ArrayList<>();
 
     public void addNode(RouteNode node) {
-        nodes.add(node);
+        frontier.add(node);
     }
 
     public void addNodes(ArrayList<RouteNode> neighbours) {
-        nodes.addAll(neighbours);
+       for (RouteNode neighbour : neighbours) {
+           if (!frontier.contains(neighbour) && !neighbour.getExplored()) {
+               frontier.add(neighbour);
+           }
+       }
     }
 
     public RouteNode removeNode() {
         double cost = Double.MAX_VALUE;
         RouteNode nextNode = null;
-        for (int i = 0; i < nodes.size(); i++) {
-            if (cost > nodes.get(i).getEstimatedCostToGoal() + nodes.get(i).getCostToReachNode()) {
-                cost = nodes.get(i).getEstimatedCostToGoal() + nodes.get(i).getCostToReachNode();
-                nextNode = nodes.get(i);
-                nodes.remove(i);
+        int indexToRemove = 0;
+        for (int i = 0; i < frontier.size(); i++) {
+            if (cost > frontier.get(i).getEstimatedCostToGoal() + frontier.get(i).getCostToReachNode()) {
+                cost = frontier.get(i).getEstimatedCostToGoal() + frontier.get(i).getCostToReachNode();
+                indexToRemove = i;
             }
         }
+        nextNode = frontier.get(indexToRemove);
+        nextNode.setExplored(true);
+        frontier.remove(indexToRemove);
         return nextNode;
     }
 }
