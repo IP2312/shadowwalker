@@ -2,12 +2,11 @@ package org.example.project.controller;
 
 import org.example.project.model.*;
 import org.example.project.services.OverpassServices;
-import org.example.project.util.Frontier;
-import org.example.project.util.Navigation;
-import org.example.project.util.UtilCoordinates;
+import org.example.project.util.*;
 import org.example.project.view.View;
 import org.locationtech.jts.geom.Coordinate;
 
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
 public class HomeController {
@@ -20,6 +19,8 @@ public class HomeController {
     UtilCoordinates utilCoordinates = new UtilCoordinates();
     Navigation navigation = new Navigation();
     Frontier frontier = new Frontier();
+    SunPositon sunPositon = new SunPositon();
+    Intersection intersection = new Intersection();
 
 
     public void calculateDistance() {
@@ -53,20 +54,20 @@ public class HomeController {
     }
 
 
-    public void loadBuildingsObjects(){
+    public void loadBuildingsObjects() {
         OverpassResponse result = overpassServices.getBuildingsNearPoints();
         for (OverpassElement element : result.elements) {
             if (element.type.equals("way")) {
-               buildings.add(new BuildingWay(element.id, "building", (ArrayList<Long>) element.nodes));
+                buildings.add(new BuildingWay(element.id, "building", (ArrayList<Long>) element.nodes));
             } else if (element.type.equals("node")) {
-               buildingNodes.add(new BuildingNode((long) element.id, element.type, (ArrayList<Long>) element.nodes));
+                buildingNodes.add(new BuildingNode((long) element.id, element.type, (ArrayList<Long>) element.nodes));
             }
         }
     }
 
 
     public ArrayList<RouteNode> findeRout(GeoCoordinate startPoint, GeoCoordinate endPoint) {
-        ArrayList<RouteNode> routNodes = new ArrayList<>();
+
 
         RouteNode startNode = navigation.getClosestNode(startPoint, routeNodes);
         RouteNode endNode = navigation.getClosestNode(endPoint, routeNodes);
@@ -100,5 +101,14 @@ public class HomeController {
         System.out.println(shortestPath);
         return shortestPath;
 
+    }
+
+    public void checkForShade(RouteNode currentNode) {
+        GeoCoordinate RayEnd = sunPositon.calculateLineForSunray(currentNode, ZonedDateTime.now());
+        GeoCoordinate RayStart = currentNode.getCoordinate();
+        for (BuildingWay buildingWay : buildings) {
+            intersection.intersection(RayStart, RayEnd, buildingWay, buildingNodes);
+
+        }
     }
 }
