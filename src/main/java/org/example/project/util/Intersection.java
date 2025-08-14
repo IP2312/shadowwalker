@@ -6,45 +6,72 @@ import org.example.project.model.GeoCoordinate;
 import org.locationtech.jts.geom.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 
 
 public class Intersection {
 
 
-    public void intersection(GeoCoordinate start, GeoCoordinate end, BuildingWay building, ArrayList<BuildingNode> nodes) {
+    public void intersection(GeoCoordinate start, GeoCoordinate end, BuildingWay building, List<BuildingNode> nodes) {
+
         GeometryFactory gf = new GeometryFactory();
 
-        Coordinate[] polygonCoords = new Coordinate[building.getNodesId().size()];
-
-        for (int i = 0; i < building.getNodesId().size(); i++) {
-            building.getNodesId().get(i);
-            for (BuildingNode node : nodes) {
-                if (node.getId() == building.getNodesId().get(i)) {
-                    polygonCoords[i] = new Coordinate(node.getCoordinate().getLat(), node.getCoordinate().getLon());
-                }
-            }
+        // Index building nodes by id for fast lookup
+        HashMap<Long, BuildingNode> nodeIndex = new HashMap<>(nodes.size());
+        for (BuildingNode n : nodes) {
+            long id = n.getId();
+            nodeIndex.put(id, n);
         }
-//        {
-////                new Coordinate(48.30831037671277, 14.288051640589828),
-////                new Coordinate(48.30902218628471, 14.289376651816868),
-////                new Coordinate(48.30863105620982, 14.288962609546102),
-////                new Coordinate(48.30817011793251, 14.288193521150745),
-////                new Coordinate(48.30831037671277, 14.288051640589828)
-//        };
-        Polygon polygon = gf.createPolygon(polygonCoords);
 
-        // Define a line that intersects the polygon
-        Coordinate[] lineCoords = new Coordinate[]{
-                new Coordinate(start.getLat(), start.getLon()),
-                new Coordinate(end.getLat(), end.getLon())
+        List<Long> ids = building.getNodesId();
+        if (ids == null || ids.size() < 3) {
+            System.out.println("Not enough vertices to form a polygon");
+            return;
+        }
+
+        // Ensure ring is closed (first id == last id)
+        boolean closed = ids.size() >= 4 && ids.get(0).equals(ids.get(ids.size() - 1));
+        List<Long> ringIds = closed ? ids : new ArrayList<>(ids);
+        if (!closed) {
+            ringIds.add(ids.get(0));
+        }
+
+        // Build polygon coordinates (JTS expects x=lon, y=lat)
+        Coordinate[] poly = new Coordinate[ringIds.size()];
+        for (int i = 0; i < ringIds.size(); i++) {
+            Long nid = ringIds.get(i);
+            BuildingNode bn = nodeIndex.get(nid);
+            if (bn == null || bn.getCoordinate() == null) {
+                System.out.println("Missing node for id: " + nid);
+                return;
+            }
+            double lat = bn.getCoordinate().getLat();
+            double lon = bn.getCoordinate().getLon();
+            poly[i] = new Coordinate(lon, lat);
+        }
+
+        Polygon polygon;
+        try {
+            polygon = gf.createPolygon(poly);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid polygon geometry: " + e.getMessage());
+            return;
+        }
+
+        // Build line (lon, lat)
+        Coordinate[] lineCoords = new Coordinate[] {
+                new Coordinate(start.getLon(), start.getLat()),
+                new Coordinate(end.getLon(), end.getLat())
         };
         LineString line = gf.createLineString(lineCoords);
 
         boolean intersects = polygon.intersects(line);
-        Geometry intersection = polygon.intersection(line);
+        Geometry intersection = intersects ? polygon.intersection(line) : null;
 
         System.out.println("Intersects? " + intersects);
-        System.out.println("Intersection geometry: " + intersection);
-
+        System.out.println("Intersection geometry: " + (intersection != null ? intersection : "—"));
     }
+
 }

@@ -4,38 +4,35 @@ import java.util.ArrayList;
 
 public class BuildingNode implements Node {
     private long id;
-    private String type;
-    private ArrayList<Long> nodesId;
+  private GeoCoordinate coordinate;
 
 
-    public BuildingNode(long id, String type, ArrayList<Long> nodesId) {
+
+    public BuildingNode(long id, GeoCoordinate coordinate) {
         this.id = id;
-        this.type = type;
-        this.nodesId = nodesId;
+        this.coordinate = coordinate;
     }
 
     @Override
     public long getId() {
-        return 0;
+        return id;
     }
-
     @Override
-    public void setId(int id) {
-
+    public void setId(long id) {
+        this.id = id;
     }
 
     @Override
     public GeoCoordinate getCoordinate() {
-        return null;
+        return coordinate;
     }
 
     @Override
     public void setCoordinate(GeoCoordinate coordinate) {
-
-    }
-
-    @Override
-    public String toString() {
-        return "";
+        this.coordinate = coordinate;
     }
 }
+
+
+
+

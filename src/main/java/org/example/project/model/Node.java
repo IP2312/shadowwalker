@@ -3,7 +3,7 @@ package org.example.project.model;
 public interface Node {
     long getId();
 
-    void setId(int id);
+    void setId(long id);
 
     GeoCoordinate getCoordinate();
 

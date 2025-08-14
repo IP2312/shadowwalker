@@ -60,7 +60,7 @@ public class HomeController {
             if (element.type.equals("way")) {
                 buildings.add(new BuildingWay(element.id, "building", (ArrayList<Long>) element.nodes));
             } else if (element.type.equals("node")) {
-                buildingNodes.add(new BuildingNode((long) element.id, element.type, (ArrayList<Long>) element.nodes));
+                buildingNodes.add(new BuildingNode((long) element.id, new GeoCoordinate(element.lat,element.lon)));
             }
         }
     }
