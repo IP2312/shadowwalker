@@ -54,11 +54,16 @@ public class HomeController {
     }
 
 
-    public void loadBuildingsObjects() {
+    public void loadBuildingObjects() {
         OverpassResponse result = overpassServices.getBuildingsNearPoints();
         for (OverpassElement element : result.elements) {
             if (element.type.equals("way")) {
-                buildings.add(new BuildingWay(element.id, "building", (ArrayList<Long>) element.nodes));
+                BuildingWay newBuilding = new BuildingWay(element.id, "building", (ArrayList<Long>) element.nodes);
+                newBuilding.setHeight(element.tags.get("height"));
+                newBuilding.setLevels(element.tags.get("building:levels"));
+                buildings.add(newBuilding);
+                System.out.println(newBuilding);
+
             } else if (element.type.equals("node")) {
                 buildingNodes.add(new BuildingNode((long) element.id, new GeoCoordinate(element.lat,element.lon)));
             }
@@ -104,7 +109,7 @@ public class HomeController {
     }
 
     public void checkForShade(RouteNode currentNode) {
-        GeoCoordinate RayEnd = sunPositon.calculateLineForSunray(currentNode, ZonedDateTime.now());
+        GeoCoordinate RayEnd = sunPositon.calculateLineForSunray(currentNode, ZonedDateTime.now().minusHours(3));
         GeoCoordinate RayStart = currentNode.getCoordinate();
         for (BuildingWay buildingWay : buildings) {
             intersection.intersection(RayStart, RayEnd, buildingWay, buildingNodes);

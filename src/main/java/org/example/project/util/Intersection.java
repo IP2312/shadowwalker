@@ -5,6 +5,7 @@ import org.example.project.model.BuildingWay;
 import org.example.project.model.GeoCoordinate;
 import org.locationtech.jts.geom.*;
 
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +13,8 @@ import java.util.List;
 
 
 public class Intersection {
+    UtilCoordinates utilCoordinates = new UtilCoordinates();
+    SunPositon sunPositon = new SunPositon();
 
 
     public void intersection(GeoCoordinate start, GeoCoordinate end, BuildingWay building, List<BuildingNode> nodes) {
@@ -72,6 +75,39 @@ public class Intersection {
 
         System.out.println("Intersects? " + intersects);
         System.out.println("Intersection geometry: " + (intersection != null ? intersection : "—"));
+        System.out.println("Distance: ");
+       double distance = utilCoordinates.haversineDistance(start, new GeoCoordinate(intersection.getCoordinate().y, intersection.getCoordinate().x));
+       //TODO time
+        double heightSun = calculateHeightIncrease(distance, sunPositon.getElevation(start.lat,start.lon, ZonedDateTime.now()));
+        double buildingHeight = getBuildingHeight(building);
+
+        System.out.println("Sunh: " + heightSun);
+        System.out.println("Building: " + buildingHeight);
+
+
+        if (buildingHeight > heightSun){
+            System.out.println("In the Shadow!!");
+        }
+        else {
+            System.out.println("In the sun");
+        }
+
     }
+
+
+    public double getBuildingHeight(BuildingWay building){
+        double height;
+        if (building.getHeight() <=0) {
+           return building.getLevels() * 3.5;
+        }
+        return building.getHeight();
+    }
+
+    public double calculateHeightIncrease(double distanceMeters, double angleDegrees) {
+        // Convert degrees to radians for Math.tan
+        double angleRadians = Math.toRadians(angleDegrees);
+        return distanceMeters * Math.tan(angleRadians);
+    }
+
 
 }

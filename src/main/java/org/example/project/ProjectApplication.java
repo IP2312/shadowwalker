@@ -27,17 +27,17 @@ public class ProjectApplication {
 
         homeController.calculateDistance();
         homeController.loadRouteObjects();
-        homeController.loadBuildingsObjects();
+        homeController.loadBuildingObjects();
         ArrayList<RouteNode> shortestPath = homeController.findeRout(view.getStartPoint(), view.getDestinationPoint());
         System.out.println(ZonedDateTime.now());
 
-        System.out.println("test");
 
-        RouteNode testNode = new RouteNode(1, new GeoCoordinate(48.3107120116412, 14.292525938461889));
-        GeoCoordinate geoCoordinate = sunPositon.calculateLineForSunray(testNode, ZonedDateTime.now().plusHours(2));
+
+        RouteNode testNode = new RouteNode(1, new GeoCoordinate(48.30975485728436, 14.293327037834715));
+        GeoCoordinate geoCoordinate = sunPositon.calculateLineForSunray(testNode, ZonedDateTime.now());
         System.out.println(geoCoordinate);
         homeController.checkForShade(testNode);
-        System.out.println("Test2");
+
     }
 
 }

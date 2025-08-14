@@ -32,6 +32,7 @@ public class SunPositon {
         double lon = node.getCoordinate().getLon();
         double azimuth = getAzimuth(lat,lon, time);
         System.out.println("Azimuth: " + azimuth);
+        System.out.println("Elevation" + getElevation(lat,lon,time));
         double distanceMeters = 200;
         double R = 6371000.0; // Earth radius in meters
         double bearing = Math.toRadians(azimuth);
