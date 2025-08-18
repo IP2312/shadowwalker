@@ -109,7 +109,8 @@ public class HomeController {
     }
 
     public void checkForShade(RouteNode currentNode) {
-        GeoCoordinate RayEnd = sunPositon.calculateLineForSunray(currentNode, ZonedDateTime.now().minusHours(3));
+        GeoCoordinate RayEnd = sunPositon.calculateLineForSunray(currentNode, ZonedDateTime.now().plusHours(4
+        ));
         GeoCoordinate RayStart = currentNode.getCoordinate();
         for (BuildingWay buildingWay : buildings) {
             intersection.intersection(RayStart, RayEnd, buildingWay, buildingNodes);

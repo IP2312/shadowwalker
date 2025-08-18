@@ -20,9 +20,8 @@ public class ProjectApplication {
     public static void main(String[] args) {
         SpringApplication.run(ProjectApplication.class, args);
         HomeController homeController = new HomeController();
-        UtilCoordinates utilCoordinates = new UtilCoordinates();
+
         SunPositon sunPositon = new SunPositon();
-        Navigation navigation = new Navigation();
         View view = new View();
 
         homeController.calculateDistance();
