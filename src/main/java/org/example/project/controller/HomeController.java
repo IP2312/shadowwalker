@@ -5,10 +5,13 @@ import org.example.project.services.OverpassServices;
 import org.example.project.util.*;
 import org.example.project.view.View;
 import org.locationtech.jts.geom.Coordinate;
+import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
+@Controller
 public class HomeController {
     View view = new View();
     OverpassServices overpassServices = new OverpassServices();
@@ -23,20 +26,7 @@ public class HomeController {
     Intersection intersection = new Intersection();
 
 
-    public void calculateDistance() {
-        GeoCoordinate startPoint = view.getStartPoint();
-        GeoCoordinate destinationPoint = view.getDestinationPoint();
-        System.out.println("Harvsindistance:");
-        System.out.println(utilCoordinates.haversineDistance(startPoint, destinationPoint));
-        System.out.println("Distance: ");
-        Coordinate coordinate1 = new Coordinate(startPoint.getLat(), startPoint.getLon());
-        Coordinate coordinate2 = new Coordinate(destinationPoint.getLat(), destinationPoint.getLon());
-        System.out.println(coordinate1.distance(coordinate2) * 100000);
-        Coordinate test1 = new Coordinate(0, 3);
-        Coordinate test2 = new Coordinate(4, 0);
-        System.out.println(test1.distance(test2));
 
-    }
 
 
     public void loadRouteObjects() {

@@ -1,4 +1,4 @@
-package org.example.project.controller;
+package org.example.project.util;
 
 public enum Objects {
     BUILDING,

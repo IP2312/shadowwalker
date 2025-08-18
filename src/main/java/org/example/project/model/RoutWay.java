@@ -1,6 +1,6 @@
 package org.example.project.model;
 
-import org.example.project.controller.Objects;
+import org.example.project.util.Objects;
 
 import java.util.ArrayList;
 import java.util.Arrays;
