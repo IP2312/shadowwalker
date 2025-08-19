@@ -17,8 +17,11 @@ import java.util.List;
 
 
 @RestController
+
 @RequestMapping("/api")
 public class OverpassRestController {
+    HomeController homeController = new HomeController();
+    View view = new View();
     private final OverpassServices overpassServices;
 
     public OverpassRestController(OverpassServices overpassServices) {
@@ -26,13 +29,19 @@ public class OverpassRestController {
     }
 
     @GetMapping("/nodes")
-    public List<CoordinateDTO> getNodes() {
-        View view = new View();
+    public ArrayList<RouteNode> getNodes() {
+        HomeController homeController = new HomeController();
         System.out.println("Map from Restcontroller");
-        return List.of(
-                new CoordinateDTO(view.getStartPoint().lat, view.getStartPoint().lon),
-                new CoordinateDTO(view.getDestinationPoint().lat, view.getDestinationPoint().lon)
-        );
+        homeController.loadRouteObjects();
+        ArrayList<RouteNode> routeNodes =  homeController.findeRout(view.getStartPoint(),view.getDestinationPoint());
+
+        
+        return routeNodes;
+
+//        return List.of(
+//                new CoordinateDTO(view.getStartPoint().lat, view.getStartPoint().lon),
+//                new CoordinateDTO(view.getDestinationPoint().lat, view.getDestinationPoint().lon)
+//        );
     }
 
     @RequestMapping("/routs")
